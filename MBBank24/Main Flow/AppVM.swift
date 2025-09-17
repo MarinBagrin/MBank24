@@ -6,38 +6,32 @@ class AppVM:ObservableObject  {
         self.mainDomain = mainDomain
     }
 //    var stateApp:CurrentValueSubject<StateApplication, Never> = .init(.unauthed)
-    @Published var stateApp = StateApplication.unauthed
+    var stateApp = CurrentValueSubject<StateApplication, Never>.init(.unauthed)
     
     func homeFlowTapped() {
-        if stateApp != .home {
-            print(2,stateApp)
-            stateApp = .home
-            print(2,1,stateApp)
+        if stateApp.value != .home {
+            stateApp.value = .home
         }
     }
     func depositeFlowTapped() {
-        if stateApp != .deposite {
-            stateApp = .deposite
-            print("deposite")
+        if stateApp.value != .deposite {
+            stateApp.value = .deposite
         }
     }
     func historyFlowTapped() {
-        if stateApp != .history {
-            stateApp = .history
-            print("history")
+        if stateApp.value != .history {
+            stateApp.value = .history
         }
     }
     func platiFlowTapped() {
-        if stateApp != .plati {
-            stateApp = .plati
-            print("plati")
+        if stateApp.value != .plati {
+            stateApp.value = .plati
         }
 
     }
     func onlineBankFlowTapped() {
-        if stateApp != .onlineBank {
-            stateApp = .onlineBank
-            print("onlineBank")
+        if stateApp.value != .onlineBank {
+            stateApp.value = .onlineBank
         }
     }
 }

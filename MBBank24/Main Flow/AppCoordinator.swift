@@ -28,15 +28,15 @@ class AppCoordinator:Coordinator {
         let tempHomeCoordinator = HomeCoordinator(parrentCoordinator: self, viewController: viewController, mainDomain: mainDomain,appVM: appVM)
         childCoordinators.append(tempHomeCoordinator)
         tempHomeCoordinator.start()
+        print(3.1)
     }
     func setFlowIstoric(){}
     func setFlowOnlinebank(){}
     func setFlowPlati(){}
     private func subscribeONPublisher() {
-        appVM.$stateApp
+        appVM.stateApp
             .sink {[weak self]appState in
                 guard let self = self else { fatalError("self is nill") }
-                print("AppState in AppCoorinator: \(appState)")
 
                 childCoordinators.removeAll()
                 if (appState == .unauthed) {

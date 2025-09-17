@@ -29,9 +29,8 @@ class UIFlowBar: UIStackView {
     }
     private func subscribeOnStateApp() {
 
-        appVM.$stateApp
+        appVM.stateApp
             .sink {[weak self] stateApp in
-                print("stateApp in UIFlowBar: \(stateApp)")
                 guard let self = self else { fatalError("ErritUIFlowBAR") }
                 for flow in [flowHome,flowOnlineBank,flowDeposit,flowPlati,flowHistory] {
                     flow.tintColor = .gray

@@ -55,7 +55,7 @@ class UITableViewCardCell:UITableViewCell {
         self.cardExpire.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.cardExpire.trailingAnchor.constraint(equalTo: self.cardPhoto.trailingAnchor, constant: -16),
-            self.cardExpire.bottomAnchor.constraint(equalTo: self.cardPhoto.bottomAnchor, constant: -9)
+            self.cardExpire.bottomAnchor.constraint(equalTo: self.cardPhoto.bottomAnchor, constant: -11)
         ])
     }
     required init?(coder: NSCoder) {

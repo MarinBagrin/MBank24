@@ -30,9 +30,7 @@ class AuthVC: UIViewController {
             .dropFirst()
             .sink {[weak self] isCorrectCodeAuth in //FEW
                 if (isCorrectCodeAuth) {
-                    print(0,0)
                     self?.coordinator?.changeHomeFlow()
-                    print(0,1)
                 }
             }
             .store(in: &cancellables)

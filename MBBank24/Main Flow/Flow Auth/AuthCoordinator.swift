@@ -25,10 +25,8 @@ class AuthCoordinator:Coordinator {
         viewController = tempVC
     }
     func changeHomeFlow() {
-        print(1.0)
         viewController.dismiss(animated: true)
         self.appVM.homeFlowTapped()
-        print(1.1)
 
     }
     
