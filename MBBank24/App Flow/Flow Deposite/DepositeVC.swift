@@ -4,7 +4,7 @@ import Combine
 class DepositeVC:FlowVC {
     var depositeVM:DepositeVM
     
-    init (coordinator:DepositeCoordinator, domain:Domain, appVM:AppVM) {
+    init (coordinator:DepositeCoordinator, domain:Domain, appVM:AppVM) {//ы
         self.depositeVM = DepositeVM(domain: domain)
         super.init(coordinator: coordinator, mainDomain: mainDomain, appVM: appVM, title: "ДЕПОЗИТНЫЙ КАЛЬУЛЯТОР")
         setupUI()
