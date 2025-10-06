@@ -23,16 +23,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "77856E0B-F4FE-4B71-8CB2-854788B002F8"
+            uuid = "28F4CA03-399A-40F1-83EE-B09B36213F1C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MBBank24/Main Flow/AppCoordinator.swift"
+            filePath = "MBBank24/App Flow/Flow Home/HomeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "subscribeONPublisher()"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C1E6A231-6246-45A6-A9C3-CB5999A02792"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MBBank24/Model/Repository/StorageManager/PersistentManager/PersistentManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "fillForTheFirstTime()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
