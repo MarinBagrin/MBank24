@@ -28,3 +28,8 @@ extension CredentialsAuth {
 extension CredentialsAuth : Identifiable {
 
 }
+extension CredentialsAuth  {
+    func toCredentialsAuthDomain() -> CredentialsAuthDomain {
+        return CredentialsAuthDomain(pass_code: pass_code,user_id: user_id)
+    }
+}

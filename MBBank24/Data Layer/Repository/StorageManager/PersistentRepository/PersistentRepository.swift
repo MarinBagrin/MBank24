@@ -2,16 +2,16 @@
 
 import UIKit
 import CoreData
-protocol PersistentManager {
+protocol PersistentRepository {
     func fetchTransactions() -> [TransactionDomain]
     func fetchCredentialsAuth() -> CredentialsAuthDomain?
     func fillForTheFirstTime()
     func fetchCredentialsCard() -> CredentialsCardDomain?
-
+    func changePassword(passCode: String)
 }
 //MARK: CoreDataManager
 
-class CoreDataManager:PersistentManager {
+class PersistentRepositoryImpl:PersistentRepository {
     init() {}
     private var appDelegate: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -24,10 +24,9 @@ class CoreDataManager:PersistentManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CredentialsCard")
         do {
             guard let credentialsCard = try? (context.fetch(fetchRequest) as? [CredentialsCard])?.first else {fatalError("xyinea")}
-            return CredentialsCardDomain(credentialsCard)
+            return credentialsCard.toCredentialsCardDomain()
         }
     }
-
     //MARK: Transactions
     func fillForTheFirstTime() {
         removeAllTransactions()
@@ -39,7 +38,7 @@ class CoreDataManager:PersistentManager {
                 guard let transactionEntityDescription = NSEntityDescription.entity(forEntityName: "Transaction", in: context) else {fatalError("NSEntityDescription")}
                 let transaction = Transaction(entity: transactionEntityDescription, insertInto: context)
                 transaction.type_merchant = Int16([1,1,1,1,2,2,3,3,4,4,4,5,6,7,8].randomElement()!)
-                switch MerchantType(rawValue: transaction.type_merchant) {
+                switch TransactionDomain.MerchantType(rawValue: transaction.type_merchant) {
                 case .foodDrinks:
                     transaction.merchant = ["FOU67","FOU67","MOLDRETAIL GROUP F109","MOLDRETAIL GROUP F109","MOLDRETAIL GROUP F109","VEGETARIANUL","NR 1 STEFAN CEL MARE"].randomElement()
                     transaction.amount = Double.random(in: 16..<314)
@@ -92,16 +91,15 @@ class CoreDataManager:PersistentManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Transaction")
         do {
             let arrayTransactions = (try? context.fetch(fetchRequest) as? [Transaction]) ?? []
-            return arrayTransactions.map {transaction in return TransactionDomain(transactionRepository: transaction)}
+            return arrayTransactions.map {$0.toTransactionDomain()}
         }
     }
     //MARK: Transactions
-    func changeCredentialsAuth(passCode: String,user_id: Int32) {
+    func changePassword(passCode: String) {
         deleteCredentialsAuth()
         guard let credentialsEntityDesciption = NSEntityDescription.entity(forEntityName: "CredentialsAuth", in: context) else {fatalError("NSEntityDescription")}
         let credentialsAuth = CredentialsAuth(entity: credentialsEntityDesciption, insertInto: context)
         credentialsAuth.pass_code = passCode
-        credentialsAuth.user_id = user_id
         appDelegate.saveContext()
     }
     private func deleteCredentialsAuth() {
@@ -115,7 +113,7 @@ class CoreDataManager:PersistentManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CredentialsAuth")
         do {
             guard let credentialsAuth = (try? context.fetch(fetchRequest) as? [CredentialsAuth])?.first else {return nil}
-            return CredentialsAuthDomain(credentialsAuthCoreData: credentialsAuth)
+            return credentialsAuth.toCredentialsAuthDomain()
         }
     }
 //    public func fetchCredentials(_ id: Int) -> Credentials? {

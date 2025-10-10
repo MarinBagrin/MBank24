@@ -36,3 +36,18 @@ extension Transaction {
 extension Transaction : Identifiable {
 
 }
+extension Transaction {
+    func toTransactionDomain() -> TransactionDomain {
+        var transactionDomain = TransactionDomain()
+        transactionDomain.date = self.date!
+        transactionDomain.card_number = self.card_number!
+        transactionDomain.status = self.status
+        transactionDomain.location = self.location!
+        transactionDomain.merchant = self.merchant!
+        transactionDomain.type_merchant = self.type_merchant
+        transactionDomain.amount = self.amount
+        transactionDomain.operation_number = self.operation_number!
+        return transactionDomain
+    }
+    
+}
